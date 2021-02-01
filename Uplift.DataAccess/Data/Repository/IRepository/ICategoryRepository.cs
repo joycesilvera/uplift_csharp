@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-
-namespace Uplift.DataAccess.Data.Repository
+namespace Uplift.DataAccess.Data.Repository.IRepository
 {
-    public class UnitOfWork
+    public class ICategoryRepository
     {
-        public UnitOfWork()
+        public ICategoryRepository()
         {
         }
     }
