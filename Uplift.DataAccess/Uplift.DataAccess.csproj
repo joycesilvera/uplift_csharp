@@ -16,6 +16,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Data\Initializer\" />
     <Folder Include="Data\Repository\" />
+    <Folder Include="Data\Repository\IRepository\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uplift.Models\Uplift.Models.csproj" />
