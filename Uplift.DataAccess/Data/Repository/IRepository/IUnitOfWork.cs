@@ -6,7 +6,12 @@ using System.Text;
 
 namespace Uplift.DataAccess.Data.Repository.IRepository
 {
-    public interface IUnitOfWork
+    //all transactions, access to all repos, safe method to push all changes to database
+    public interface IUnitOfWork : IDisposable
     {
+
+        //whenever you add a new repository, you have to add it here
+        ICategoryRepository Category { get; }
+        void Save();
     }
 }

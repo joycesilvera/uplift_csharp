@@ -16,6 +16,8 @@ namespace Uplift.DataAccess.Data.Repository
 
         internal DbSet<T> dbSet;
 
+
+        //The constructor accepts a database context instance and initializes the entity set variable.
         public Repository(DbContext context)
         {
             Context = context;
@@ -34,12 +36,49 @@ namespace Uplift.DataAccess.Data.Repository
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet; //using IQueryable SO THAT we can implement all 3 types here
+
+            if(filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            //includeProperties will be comma separated 
+            if (includeProperties != null)
+            {
+                foreach(var includeProperty in includeProperties.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+
+            if(orderBy != null)
+            {
+                return orderBy(query).ToList();
+            }
+            return query.ToList();
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = dbSet; //using IQueryable SO THAT we can implement all 3 types here
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            //includeProperties will be comma separated 
+            if (includeProperties != null)
+            {
+                foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return query.FirstOrDefault();
         }
 
         public void Remove(int id)
