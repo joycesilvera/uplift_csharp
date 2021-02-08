@@ -15,5 +15,8 @@ namespace Uplift.DataAccess.Data
         }
 
         public DbSet<Category> Category { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        => options.UseSqlServer("Server=localhost,1401;Database=Practice;User=sa;Password=benzy5@Rarc");
     }
 }

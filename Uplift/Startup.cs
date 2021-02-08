@@ -12,11 +12,13 @@ using Uplift.DataAccess.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Data.SqlClient;
 
 namespace Uplift
 {
     public class Startup
     {
+        static SqlConnection con;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,12 +29,32 @@ namespace Uplift
         // This method gets called by the runtime. Use this method to add services to the container.
         //here we make use of dependency injection and it is the most integral part of .net core
 
+
+        public void Connect(string user, string password)
+        {
+            con = new SqlConnection();
+
+            try
+            {
+                con.ConnectionString = "server = localhost; User Id = " + user + "; " +
+                    "Persist Security Info = True; database = hello; Password = " + password;
+                con.Open();
+                Console.WriteLine("Succesfully connected!");
+
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Not Successful! due to " + e.ToString());
+            }
+        }
+
+
         //we will come here to add services  
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                Configuration.GetConnectionString("DefaultConnection"));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
