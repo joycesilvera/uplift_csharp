@@ -34,6 +34,9 @@
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Views\" />
     <Folder Include="Areas\Customer\Views\Home\" />
+    <Folder Include="Areas\Admin\Views\Category\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\images\services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uplift.DataAccess\Uplift.DataAccess.csproj">
