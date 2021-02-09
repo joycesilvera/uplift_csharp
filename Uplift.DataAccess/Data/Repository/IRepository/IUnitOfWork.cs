@@ -13,6 +13,7 @@ namespace Uplift.DataAccess.Data.Repository.IRepository
         //whenever you add a new repository, you have to add it here
         ICategoryRepository Category { get; }
         IFrequencyRepository Frequency { get; }
+        IServiceRepository Service { get; }
         void Save();
 
         //check
