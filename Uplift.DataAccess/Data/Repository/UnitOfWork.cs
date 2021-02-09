@@ -8,15 +8,18 @@ namespace Uplift.DataAccess.Data.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
+
+        public ICategoryRepository Category { get; private set; }
+        public IFrequencyRepository Frequency { get; private set; }
+
         private readonly ApplicationDbContext _db;
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Frequency = new FrequencyRepository(_db);
         }
-
-        public ICategoryRepository Category { get; private set; }
 
         void IDisposable.Dispose()
         {
