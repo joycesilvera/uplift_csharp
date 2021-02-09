@@ -61,7 +61,7 @@ namespace Uplift.Areas.Admin.Controllers
             return View(category);
         }
 
-        #region API CALLS
+     #region API CALLS
 
         [HttpGet]
         public IActionResult GetAll()

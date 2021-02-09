@@ -37,6 +37,7 @@
     <Folder Include="Areas\Admin\Views\Category\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\images\services\" />
+    <Folder Include="Areas\Admin\Views\Frequency\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uplift.DataAccess\Uplift.DataAccess.csproj">
