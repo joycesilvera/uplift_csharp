@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Uplift.DataAccess.Data.Repository.IRepository;
+using Uplift.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,6 +25,20 @@ namespace Uplift.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Upsert(int? id)//parameter is nullable because if you are using it for Insert, the 'id' would be null
+        {
+            Category category = new Category();
+            if(id == null)
+            {
+                return View(category);
+            }
+            category = _unitOfWork.Category.Get(id.GetValueOrDefault());
+            if(category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
 
         #region API CALLS
 
