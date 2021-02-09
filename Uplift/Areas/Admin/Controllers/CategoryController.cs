@@ -43,7 +43,7 @@ namespace Uplift.Areas.Admin.Controllers
             }
 
             _unitOfWork.Category.Remove(objFromDb);
-            _unitOfWork.Save();
+            _unitOfWork.Save(); // this step is necessary
 
             return Json(new {success= true, message = "Delete successful"});
         }
