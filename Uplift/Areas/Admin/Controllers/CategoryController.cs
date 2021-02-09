@@ -40,6 +40,27 @@ namespace Uplift.Areas.Admin.Controllers
             return View(category);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Category category)
+        {
+            if (ModelState.IsValid) //while debugging check Values -> Results View to check for invalid props
+            {
+                if (category.Id == 0)
+                {
+                    _unitOfWork.Category.Add(category);
+                }
+                else
+                {
+                    _unitOfWork.Category.Update(category);
+                }
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index));
+
+            }
+            return View(category);
+        }
+
         #region API CALLS
 
         [HttpGet]
